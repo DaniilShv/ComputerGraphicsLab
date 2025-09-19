@@ -1,42 +1,26 @@
 ﻿namespace ComputerGraphicsLab.Entities
 {
-    public class Shape
+    public abstract class Shape
     {
-        RectangleF circle1;
-        RectangleF circle2;
-        PointF[] line;
+        static public PointF CalculateRotationCoordinate(PointF point, PointF slide, float gradus)
+        {
+            float sin = float.Sin(gradus * float.Pi / 180);
+            float cos = float.Cos(gradus * float.Pi / 180);
 
-        public Shape(RectangleF circle1, RectangleF circle2, PointF[] line)
-        {
-            this.circle1 = circle1;
-            this.circle2 = circle2;
-            this.line = line;
+            float m = -slide.X;
+            float n = -slide.Y;
+            float k = -m;
+            float l = -n;
+            var x = point.X;
+            var y = point.Y;
+            var dx = x * cos - y * sin + m * cos - n * sin + k;
+            var dy = x * sin + y * cos + m * sin + n * cos + l;
+
+            return new PointF(dx, dy);
         }
 
-        public void Draw(Pen pen, Graphics graphics)
-        {
-            graphics.DrawEllipse(pen, circle1);
-            graphics.DrawEllipse(pen, circle2);
-            graphics.DrawLine(pen, line[0], line[1]);
-        }
+        public abstract void MoveShape(float x = 0, float y = 0);
 
-        public void MoveShapeX(int dx)
-        {
-            circle1.X += dx;
-            circle2.X += dx;
-            for (int i = 0; i < line.Length; i++)
-            {
-                line[i].X += dx;
-            }
-        }
-        public void MoveShapeY(int dy)
-        {
-            circle1.Y += dy;
-            circle2.Y += dy;
-            for (int i = 0; i < line.Length; i++)
-            {
-                line[i].Y += dy;
-            }
-        }
+        public abstract void Draw(Pen pen, Graphics graphics);
     }
 }
