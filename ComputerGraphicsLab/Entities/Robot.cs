@@ -1,5 +1,4 @@
 ﻿using ComputerGraphicsLab.Enums;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ComputerGraphicsLab.Entities
 {
@@ -26,7 +25,7 @@ namespace ComputerGraphicsLab.Entities
         {
             shape = new Stand(new RectangleF(60, 150, 10, 10),
                 new RectangleF(100, 150, 10, 10),
-                new Line(new PointF(60, 150),new PointF(110, 150)));
+                new Line(new PointF(60, 150), new PointF(110, 150)));
             line1 = new Line(new PointF(85, 149),
                 new PointF(85, 80));
             circle1 = new RectangleF(80, 70, 10, 10);
@@ -97,7 +96,7 @@ namespace ComputerGraphicsLab.Entities
 
         public bool LimitXRight(int x)
         {
-            return line1.LimitXRight(x) && line2.LimitXRight(x) && line3.LimitXRight(x) 
+            return line1.LimitXRight(x) && line2.LimitXRight(x) && line3.LimitXRight(x)
                 && hook.LimitXRight(x) && shape.LimitXRight(x);
         }
 
@@ -105,6 +104,25 @@ namespace ComputerGraphicsLab.Entities
         {
             return line1.LimitXLeft(x) && line2.LimitXLeft(x) && line3.LimitXLeft(x)
                 && hook.LimitXLeft(x) && shape.LimitXLeft(x);
+        }
+
+        public void Scale(float scale, PartOfStick partOfStick)
+        {
+            switch (partOfStick)
+            {
+                case PartOfStick.FirstStick:
+                    line1.SetCoordinates(point2: new PointF(line1.Point2.X, line1.Point2.Y - scale));
+                    line2.MoveShape(y: -scale);
+                    line3.MoveShape(y: -scale);
+                    circle1.Y -= scale;
+                    circle2.Y -= scale;
+                    hook.MoveShape(y: -scale);
+                    break;
+                case PartOfStick.SecondStick:
+                    line3.SetCoordinates(point2:Shape.ScalePoint(line3.Point2, line3.Point1, scale));
+                    hook.Scale(scale);
+                    break;
+            }
         }
     }
 }

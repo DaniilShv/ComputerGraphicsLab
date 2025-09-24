@@ -73,14 +73,20 @@ namespace ComputerGraphicsLab.Entities
         public bool LimitXRight(int x)
         {
             if (point1.X >= x || point2.X >= x)
-                 return false;
+                return false;
             return true;
         }
         public bool LimitXLeft(int x)
         {
             if (point1.X <= x || point2.X <= x)
-                 return false;
+                return false;
             return true;
+        }
+
+        public void Scale(float scale)
+        {
+            point1 = ScalePoint(point1, point2, scale);
+            point2 = ScalePoint(point2, point1, scale);
         }
     }
 }

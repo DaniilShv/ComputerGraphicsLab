@@ -8,9 +8,13 @@ namespace ComputerGraphicsLab
         int curGradus1 = 0;
         int curGradus2 = 0;
 
+        int curScale1 = 0;
+        int curScale2 = 0;
+
         int robotSpeed = 1;
 
         RotationAxis axis;
+        PartOfStick stick;
 
         Pen pen_gr = new Pen(Color.Green, 4);
         Pen pen_bl = new Pen(Brushes.Black, 4);
@@ -113,6 +117,40 @@ namespace ComputerGraphicsLab
         private void button1_Click(object sender, EventArgs e)
         {
             MessageBox.Show("”правление:\na - влево\nd - вправо");
+        }
+
+        private void trackBar3_Scroll(object sender, EventArgs e)
+        {
+            if (stick == PartOfStick.FirstStick)
+            {
+                if (curScale1 - trackBar3.Value < 0)
+                    robot.Scale(20, stick);
+                else
+                    robot.Scale(-20, stick);
+                curScale1 = trackBar3.Value;
+            }
+            if (stick == PartOfStick.SecondStick)
+            {
+                if (curScale2 - trackBar3.Value < 0)
+                    robot.Scale(20, stick);
+                else
+                    robot.Scale(-20, stick);
+                curScale2 = trackBar3.Value;
+            }
+            Invalidate();
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            stick = comboBox2.SelectedIndex switch
+            {
+                0 => PartOfStick.FirstStick,
+                1 => PartOfStick.SecondStick
+            };
+            if (stick == PartOfStick.FirstStick)
+                trackBar3.Value = curScale1;
+            if (stick == PartOfStick.SecondStick)
+                trackBar3.Value = curScale2;
         }
     }
 }

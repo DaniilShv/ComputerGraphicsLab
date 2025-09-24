@@ -44,5 +44,12 @@
         {
             return line1.LimitXLeft(x) && line2.LimitXLeft(x) && line3.LimitXLeft(x);
         }
+
+        public void Scale(float scale)
+        {
+            line2.Scale(scale);
+            line3.Scale(scale);
+            line1.SetCoordinates(line2.Point1, line3.Point1);
+        }
     }
 }

@@ -35,8 +35,11 @@
             label1 = new Label();
             trackBar2 = new TrackBar();
             button1 = new Button();
+            comboBox2 = new ComboBox();
+            trackBar3 = new TrackBar();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)trackBar2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar3).BeginInit();
             SuspendLayout();
             // 
             // trackBar1
@@ -108,11 +111,33 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // comboBox2
+            // 
+            comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Items.AddRange(new object[] { "1 стержень", "2 стержень" });
+            comboBox2.Location = new Point(614, 216);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(177, 23);
+            comboBox2.TabIndex = 8;
+            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
+            // 
+            // trackBar3
+            // 
+            trackBar3.Location = new Point(614, 245);
+            trackBar3.Maximum = 3;
+            trackBar3.Name = "trackBar3";
+            trackBar3.Size = new Size(177, 45);
+            trackBar3.TabIndex = 9;
+            trackBar3.Scroll += trackBar3_Scroll;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(trackBar3);
+            Controls.Add(comboBox2);
             Controls.Add(button1);
             Controls.Add(trackBar2);
             Controls.Add(label1);
@@ -128,6 +153,7 @@
             KeyDown += Form1_KeyDown;
             ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
             ((System.ComponentModel.ISupportInitialize)trackBar2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -140,5 +166,7 @@
         private Label label1;
         private TrackBar trackBar2;
         private Button button1;
+        private ComboBox comboBox2;
+        private TrackBar trackBar3;
     }
 }
